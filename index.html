@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .joke-box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .joke-box.loading {
+            color: #667eea;
+            font-style: italic;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: #e74c3c;
+            background: #fadbd8;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .joke-box {
+                font-size: 1em;
+                padding: 20px;
+            }
+
+            button {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">🎭</div>
+        <h1>Joke Generator</h1>
+        <p class="subtitle">Get random jokes instantly!</p>
+
+        <div class="joke-box" id="jokeBox">
+            Click a button to get started!
+        </div>
+
+        <div class="button-group">
+            <button onclick="getRandomJoke()">Get a Joke</button>
+            <button onclick="getMultipleJokes()">Get 3 Jokes</button>
+            <button onclick="clearJokes()">Clear</button>
+        </div>
+
+        <div id="errorBox"></div>
+    </div>
+
+    <script>
+        const API_URL = 'https://v2.jokeapi.dev/joke/Any';
+
+        /**
+         * Fetch a single random joke
+         */
+        async function getRandomJoke() {
+            const jokeBox = document.getElementById('jokeBox');
+            const errorBox = document.getElementById('errorBox');
+            errorBox.innerHTML = '';
+
+            jokeBox.classList.add('loading');
+            jokeBox.textContent = '🔄 Loading...';
+
+            try {
+                const response = await fetch(API_URL);
+                
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.error) {
+                    throw new Error('Failed to fetch joke');
+                }
+
+                jokeBox.classList.remove('loading');
+
+                // Format the joke based on type
+                if (data.type === 'single') {
+                    jokeBox.textContent = data.joke;
+                } else if (data.type === 'twopart') {
+                    jokeBox.innerHTML = `<div><strong>Setup:</strong> ${data.setup}<br><br><strong>Punchline:</strong> ${data.delivery}</div>`;
+                } else {
+                    jokeBox.textContent = 'Could not format joke';
+                }
+            } catch (error) {
+                jokeBox.classList.remove('loading');
+                jokeBox.textContent = '😢 Sorry, could not fetch a joke.';
+                errorBox.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                console.error('Error:', error);
+            }
+        }
+
+        /**
+         * Fetch multiple random jokes
+         */
+        async function getMultipleJokes() {
+            const jokeBox = document.getElementById('jokeBox');
+            const errorBox = document.getElementById('errorBox');
+            errorBox.innerHTML = '';
+
+            jokeBox.classList.add('loading');
+            jokeBox.textContent = '🔄 Loading 3 jokes...';
+
+            try {
+                const jokes = [];
+                
+                for (let i = 0; i < 3; i++) {
+                    const response = await fetch(API_URL);
+                    
+                    if (!response.ok) {
+                        throw new Error(`API error: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+
+                    if (!data.error) {
+                        let jokeText = '';
+                        if (data.type === 'single') {
+                            jokeText = data.joke;
+                        } else if (data.type === 'twopart') {
+                            jokeText = `<strong>Setup:</strong> ${data.setup}<br><strong>Punchline:</strong> ${data.delivery}`;
+                        }
+                        jokes.push(jokeText);
+                    }
+                }
+
+                jokeBox.classList.remove('loading');
+
+                if (jokes.length > 0) {
+                    jokeBox.innerHTML = jokes.map((joke, index) => 
+                        `<div style="margin: 15px 0; text-align: left;"><strong>Joke ${index + 1}:</strong><br>${joke}</div>`
+                    ).join('<hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">');
+                } else {
+                    jokeBox.textContent = '😢 Could not fetch jokes.';
+                }
+            } catch (error) {
+                jokeBox.classList.remove('loading');
+                jokeBox.textContent = '😢 Sorry, could not fetch jokes.';
+                errorBox.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                console.error('Error:', error);
+            }
+        }
+
+        /**
+         * Clear the jokes
+         */
+        function clearJokes() {
+            document.getElementById('jokeBox').textContent = 'Click a button to get started!';
+            document.getElementById('jokeBox').classList.remove('loading');
+            document.getElementById('errorBox').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
