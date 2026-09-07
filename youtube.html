@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular YouTube Channels - Mason Made</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .channel-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .channel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .channel-icon {
+            width: 100%;
+            height: 200px;
+            background: #FF0000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+        }
+
+        .channel-content {
+            padding: 20px;
+        }
+
+        .channel-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .channel-subscribers {
+            color: #FF0000;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .channel-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+
+        .channel-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #FF0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .channel-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .channels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📺 Popular YouTube Channels</h1>
+            <p>Mason Made - Subscribe to the most popular creators</p>
+        </header>
+
+        <nav>
+            <a href="index.html">🎭 Jokes</a>
+            <a href="games.html">🎮 Games</a>
+            <a href="websites.html">🌐 Websites</a>
+            <a href="youtube.html" class="active">📺 YouTube Channels</a>
+        </nav>
+
+        <div class="channels-grid">
+            <!-- Channel 1: SET India -->
+            <div class="channel-card">
+                <div class="channel-icon">🎬</div>
+                <div class="channel-content">
+                    <div class="channel-title">SET India</div>
+                    <div class="channel-subscribers">300M+ Subscribers</div>
+                    <div class="channel-description">
+                        Official channel of Sony Entertainment Television with TV shows, clips, and entertainment content.
+                    </div>
+                    <a href="https://www.youtube.com/@SetindiaOfficial" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 2: MrBeast -->
+            <div class="channel-card">
+                <div class="channel-icon">💰</div>
+                <div class="channel-content">
+                    <div class="channel-title">MrBeast</div>
+                    <div class="channel-subscribers">250M+ Subscribers</div>
+                    <div class="channel-description">
+                        Viral challenge and stunt videos with impressive production quality and generous giveaways.
+                    </div>
+                    <a href="https://www.youtube.com/@MrBeast" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 3: Dude Perfect -->
+            <div class="channel-card">
+                <div class="channel-icon">🎯</div>
+                <div class="channel-content">
+                    <div class="channel-title">Dude Perfect</div>
+                    <div class="channel-subscribers">60M+ Subscribers</div>
+                    <div class="channel-description">
+                        Trick shots, sports, and comedy stunts with five talented creators and spectacular effects.
+                    </div>
+                    <a href="https://www.youtube.com/@DudePerfect" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 4: PewDiePie -->
+            <div class="channel-card">
+                <div class="channel-icon">🎮</div>
+                <div class="channel-content">
+                    <div class="channel-title">PewDiePie</div>
+                    <div class="channel-subscribers">33M+ Subscribers</div>
+                    <div class="channel-description">
+                        Gaming content, memes, and comedy from one of YouTube's most influential creators.
+                    </div>
+                    <a href="https://www.youtube.com/@PewDiePie" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 5: Vsauce -->
+            <div class="channel-card">
+                <div class="channel-icon">🔬</div>
+                <div class="channel-content">
+                    <div class="channel-title">Vsauce</div>
+                    <div class="channel-subscribers">20M+ Subscribers</div>
+                    <div class="channel-description">
+                        Educational science videos exploring fascinating questions about the universe and human nature.
+                    </div>
+                    <a href="https://www.youtube.com/@Vsauce" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 6: WIRED -->
+            <div class="channel-card">
+                <div class="channel-icon">📰</div>
+                <div class="channel-content">
+                    <div class="channel-title">WIRED</div>
+                    <div class="channel-subscribers">20M+ Subscribers</div>
+                    <div class="channel-description">
+                        Celebrity interviews, tech reviews, and pop culture content from the popular magazine.
+                    </div>
+                    <a href="https://www.youtube.com/@WIRED" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 7: Kurzgesagt -->
+            <div class="channel-card">
+                <div class="channel-icon">🎨</div>
+                <div class="channel-content">
+                    <div class="channel-title">Kurzgesagt</div>
+                    <div class="channel-subscribers">19M+ Subscribers</div>
+                    <div class="channel-description">
+                        Animated educational videos explaining science, philosophy, and complex concepts beautifully.
+                    </div>
+                    <a href="https://www.youtube.com/@kurzgesagt" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 8: Linus Tech Tips -->
+            <div class="channel-card">
+                <div class="channel-icon">💻</div>
+                <div class="channel-content">
+                    <div class="channel-title">Linus Tech Tips</div>
+                    <div class="channel-subscribers">18M+ Subscribers</div>
+                    <div class="channel-description">
+                        Computer hardware reviews, tech news, and in-depth technology content for enthusiasts.
+                    </div>
+                    <a href="https://www.youtube.com/@LinusTechTips" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 9: TED-Ed -->
+            <div class="channel-card">
+                <div class="channel-icon">🎓</div>
+                <div class="channel-content">
+                    <div class="channel-title">TED-Ed</div>
+                    <div class="channel-subscribers">18M+ Subscribers</div>
+                    <div class="channel-description">
+                        Animated educational lessons on history, science, literature, and personal development.
+                    </div>
+                    <a href="https://www.youtube.com/@TED-Ed" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 10: Markiplier -->
+            <div class="channel-card">
+                <div class="channel-icon">🎮</div>
+                <div class="channel-content">
+                    <div class="channel-title">Markiplier</div>
+                    <div class="channel-subscribers">35M+ Subscribers</div>
+                    <div class="channel-description">
+                        Gaming videos, comedy sketches, and entertainment from a beloved YouTube gaming personality.
+                    </div>
+                    <a href="https://www.youtube.com/@markiplier" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 11: MrBeast Gaming -->
+            <div class="channel-card">
+                <div class="channel-icon">🕹️</div>
+                <div class="channel-content">
+                    <div class="channel-title">MrBeast Gaming</div>
+                    <div class="channel-subscribers">70M+ Subscribers</div>
+                    <div class="channel-description">
+                        Gaming content from MrBeast with challenges, competitions, and entertaining gameplay.
+                    </div>
+                    <a href="https://www.youtube.com/@MrBeastGaming" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 12: How It's Made -->
+            <div class="channel-card">
+                <div class="channel-icon">🏭</div>
+                <div class="channel-content">
+                    <div class="channel-title">How It's Made</div>
+                    <div class="channel-subscribers">25M+ Subscribers</div>
+                    <div class="channel-description">
+                        Fascinating videos showing how everyday products and items are manufactured and created.
+                    </div>
+                    <a href="https://www.youtube.com/@HowItsMadeYT" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 13: Crash Course -->
+            <div class="channel-card">
+                <div class="channel-icon">📚</div>
+                <div class="channel-content">
+                    <div class="channel-title">Crash Course</div>
+                    <div class="channel-subscribers">13M+ Subscribers</div>
+                    <div class="channel-description">
+                        Quick educational series on science, history, literature, and many other academic subjects.
+                    </div>
+                    <a href="https://www.youtube.com/@crashcourse" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 14: GoPro -->
+            <div class="channel-card">
+                <div class="channel-icon">📹</div>
+                <div class="channel-content">
+                    <div class="channel-title">GoPro</div>
+                    <div class="channel-subscribers">16M+ Subscribers</div>
+                    <div class="channel-description">
+                        Action-packed videos of extreme sports, adventures, and incredible moments captured on GoPro.
+                    </div>
+                    <a href="https://www.youtube.com/@GoPro" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+
+            <!-- Channel 15: National Geographic -->
+            <div class="channel-card">
+                <div class="channel-icon">🌍</div>
+                <div class="channel-content">
+                    <div class="channel-title">National Geographic</div>
+                    <div class="channel-subscribers">15M+ Subscribers</div>
+                    <div class="channel-description">
+                        Documentary content about nature, wildlife, science, and exploration around the world.
+                    </div>
+                    <a href="https://www.youtube.com/@NatGeo" class="channel-link">Subscribe</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Mason Made © 2024 | Popular YouTube Channels Directory</p>
+            <p>Made with 💜 by Mason</p>
+        </footer>
+    </div>
+</body>
+</html>
